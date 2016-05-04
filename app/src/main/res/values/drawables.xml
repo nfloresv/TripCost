@@ -7,5 +7,6 @@
   <item name="ic_done" type="drawable">@drawable/ic_done</item>
   <item name="ic_group" type="drawable">@drawable/ic_group</item>
   <item name="ic_group_add" type="drawable">@drawable/ic_group_add</item>
+  <item name="ic_person" type="drawable">@drawable/ic_person</item>
   <item name="ic_settings" type="drawable">@drawable/ic_settings</item>
 </resources>
