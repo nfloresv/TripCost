@@ -17,10 +17,12 @@ import android.view.View;
 
 import cl.flores.nicolas.tripcost.R;
 import cl.flores.nicolas.tripcost.database.Friend;
+import cl.flores.nicolas.tripcost.database.Trip;
 import cl.flores.nicolas.tripcost.fragments.FriendFragment;
+import cl.flores.nicolas.tripcost.fragments.TripFragment;
 
 public class HomeActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener, FriendFragment.OnFriendListInteractionListener {
+    implements NavigationView.OnNavigationItemSelectedListener, FriendFragment.OnFriendListInteractionListener, TripFragment.OnTripListInteractionListener {
 
   private DrawerLayout drawer;
 
@@ -48,6 +50,9 @@ public class HomeActivity extends AppCompatActivity
 
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
+
+    Fragment trips = new TripFragment();
+    setFragment(trips);
   }
 
   @Override
@@ -81,18 +86,17 @@ public class HomeActivity extends AppCompatActivity
     return super.onOptionsItemSelected(item);
   }
 
-  @SuppressWarnings("StatementWithEmptyBody")
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
     // Handle navigation view item clicks here.
     int id = item.getItemId();
-    FragmentManager fragmentManager = getSupportFragmentManager();
 
     if (id == R.id.nav_trips) {
-      // Handle the camera action
+      Fragment trips = new TripFragment();
+      setFragment(trips);
     } else if (id == R.id.nav_friends) {
       Fragment friends = new FriendFragment();
-      fragmentManager.beginTransaction().replace(R.id.content_frame, friends).commit();
+      setFragment(friends);
     } else if (id == R.id.nav_settings) {
 
     }
@@ -105,5 +109,16 @@ public class HomeActivity extends AppCompatActivity
   public void onFriendListInteraction(Friend friend) {
     Snackbar.make(getCurrentFocus(), friend.toString(), Snackbar.LENGTH_LONG)
         .setAction("Action", null).show();
+  }
+
+  @Override
+  public void onTripListInteraction(Trip trip) {
+    Snackbar.make(getCurrentFocus(), trip.toString(), Snackbar.LENGTH_LONG)
+        .setAction("Action", null).show();
+  }
+
+  private void setFragment(Fragment fragment) {
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
   }
 }

@@ -20,4 +20,20 @@ public class Trip extends SugarRecord {
     this.start = start;
     this.end = end;
   }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public Date getStart() {
+    return start;
+  }
+
+  public Date getEnd() {
+    return end;
+  }
 }
