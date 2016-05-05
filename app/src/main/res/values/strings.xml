@@ -11,5 +11,9 @@
   <!--menu-->
   <string name="action_settings">Settings</string>
 
+  <!--activities && actionbar titles-->
+  <string name="trips_fragment">Trips</string>
+  <string name="friends_fragment">Friends</string>
+
   <!--new strings-->
 </resources>

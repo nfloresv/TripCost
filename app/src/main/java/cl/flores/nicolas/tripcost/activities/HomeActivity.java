@@ -18,29 +18,39 @@ import android.view.View;
 import cl.flores.nicolas.tripcost.R;
 import cl.flores.nicolas.tripcost.database.Friend;
 import cl.flores.nicolas.tripcost.database.Trip;
-import cl.flores.nicolas.tripcost.fragments.FriendFragment;
-import cl.flores.nicolas.tripcost.fragments.TripFragment;
+import cl.flores.nicolas.tripcost.fragments.FriendsFragment;
+import cl.flores.nicolas.tripcost.fragments.TripsFragment;
 
 public class HomeActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener, FriendFragment.OnFriendListInteractionListener, TripFragment.OnTripListInteractionListener {
+    implements NavigationView.OnNavigationItemSelectedListener,
+    FriendsFragment.OnFriendListInteractionListener, TripsFragment.OnTripListInteractionListener {
 
   private DrawerLayout drawer;
+  private Toolbar toolbar;
+  private Fragment actualFragment;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_home);
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
     FloatingActionButton add = (FloatingActionButton) findViewById(R.id.add);
-    add.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show();
-      }
-    });
+    if (add != null) {
+      add.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          if (actualFragment instanceof TripsFragment) {
+            Snackbar.make(view, "Add trip", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+          } else if (actualFragment instanceof FriendsFragment){
+            Snackbar.make(view, "Add friend", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+          }
+        }
+      });
+    }
 
     drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -49,9 +59,11 @@ public class HomeActivity extends AppCompatActivity
     toggle.syncState();
 
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-    navigationView.setNavigationItemSelectedListener(this);
+    if (navigationView != null) {
+      navigationView.setNavigationItemSelectedListener(this);
+    }
 
-    Fragment trips = new TripFragment();
+    Fragment trips = new TripsFragment();
     setFragment(trips);
   }
 
@@ -92,10 +104,10 @@ public class HomeActivity extends AppCompatActivity
     int id = item.getItemId();
 
     if (id == R.id.nav_trips) {
-      Fragment trips = new TripFragment();
+      Fragment trips = new TripsFragment();
       setFragment(trips);
     } else if (id == R.id.nav_friends) {
-      Fragment friends = new FriendFragment();
+      Fragment friends = new FriendsFragment();
       setFragment(friends);
     } else if (id == R.id.nav_settings) {
 
@@ -120,5 +132,11 @@ public class HomeActivity extends AppCompatActivity
   private void setFragment(Fragment fragment) {
     FragmentManager fragmentManager = getSupportFragmentManager();
     fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+    actualFragment = fragment;
+    if (fragment instanceof TripsFragment) {
+      toolbar.setTitle(R.string.trips_fragment);
+    } else if (fragment instanceof FriendsFragment) {
+      toolbar.setTitle(R.string.friends_fragment);
+    }
   }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 import cl.flores.nicolas.tripcost.R;
 import cl.flores.nicolas.tripcost.database.Trip;
-import cl.flores.nicolas.tripcost.fragments.TripFragment.OnTripListInteractionListener;
+import cl.flores.nicolas.tripcost.fragments.TripsFragment.OnTripListInteractionListener;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Trip} and makes a call to the

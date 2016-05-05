@@ -10,12 +10,12 @@ import java.util.List;
 
 import cl.flores.nicolas.tripcost.R;
 import cl.flores.nicolas.tripcost.database.Friend;
-import cl.flores.nicolas.tripcost.fragments.FriendFragment;
-import cl.flores.nicolas.tripcost.fragments.FriendFragment.OnFriendListInteractionListener;
+import cl.flores.nicolas.tripcost.fragments.FriendsFragment;
+import cl.flores.nicolas.tripcost.fragments.FriendsFragment.OnFriendListInteractionListener;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Friend} and makes a call to the
- * specified {@link FriendFragment.OnFriendListInteractionListener}.
+ * specified {@link FriendsFragment.OnFriendListInteractionListener}.
  */
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder> {
 

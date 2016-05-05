@@ -10,24 +10,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import cl.flores.nicolas.tripcost.R;
-import cl.flores.nicolas.tripcost.adapters.FriendAdapter;
-import cl.flores.nicolas.tripcost.database.Friend;
+import cl.flores.nicolas.tripcost.adapters.TripAdapter;
+import cl.flores.nicolas.tripcost.database.Trip;
 
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnFriendListInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnTripListInteractionListener}
  * interface.
  */
-public class FriendFragment extends Fragment {
+public class TripsFragment extends Fragment {
 
-  private OnFriendListInteractionListener mListener;
+  private OnTripListInteractionListener mListener;
 
   /**
    * Mandatory empty constructor for the fragment manager to instantiate the
    * fragment (e.g. upon screen orientation changes).
    */
-  public FriendFragment() {
+  public TripsFragment() {
   }
 
   @Override
@@ -38,14 +38,14 @@ public class FriendFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
+    View view = inflater.inflate(R.layout.fragment_trips_list, container, false);
 
     // Set the adapter
     if (view instanceof RecyclerView) {
       Context context = view.getContext();
       RecyclerView recyclerView = (RecyclerView) view;
       recyclerView.setLayoutManager(new LinearLayoutManager(context));
-      recyclerView.setAdapter(new FriendAdapter(mListener));
+      recyclerView.setAdapter(new TripAdapter(mListener));
     }
     return view;
   }
@@ -54,11 +54,11 @@ public class FriendFragment extends Fragment {
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
-    if (context instanceof OnFriendListInteractionListener) {
-      mListener = (OnFriendListInteractionListener) context;
+    if (context instanceof OnTripListInteractionListener) {
+      mListener = (OnTripListInteractionListener) context;
     } else {
       throw new RuntimeException(context.toString()
-          + " must implement OnFriendListInteractionListener");
+          + " must implement OnTripListInteractionListener");
     }
   }
 
@@ -78,7 +78,7 @@ public class FriendFragment extends Fragment {
    * "http://developer.android.com/training/basics/fragments/communicating.html"
    * >Communicating with Other Fragments</a> for more information.
    */
-  public interface OnFriendListInteractionListener {
-    void onFriendListInteraction(Friend friend);
+  public interface OnTripListInteractionListener {
+    void onTripListInteraction(Trip trip);
   }
 }
