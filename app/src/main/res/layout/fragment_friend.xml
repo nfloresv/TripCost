@@ -10,6 +10,7 @@
       android:layout_marginBottom="@dimen/text_margin"
       android:layout_marginStart="@dimen/text_margin"
       android:layout_marginTop="@dimen/text_margin"
+      android:contentDescription="@string/friend_image"
       android:src="@drawable/ic_person"
       android:textAppearance="?attr/textAppearanceListItem"/>
 

@@ -1,5 +1,7 @@
 package cl.flores.nicolas.tripcost.activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -9,11 +11,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import cl.flores.nicolas.tripcost.R;
 import cl.flores.nicolas.tripcost.database.Friend;
@@ -24,6 +28,9 @@ import cl.flores.nicolas.tripcost.fragments.TripsFragment;
 public class HomeActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener,
     FriendsFragment.OnFriendListInteractionListener, TripsFragment.OnTripListInteractionListener {
+
+  private final String STATE_ACTUAL_FRAGMENT = "ACTUAL_FRAGMENT";
+  private final int ADD_FRIEND_REQUEST = 0x0001;
 
   private DrawerLayout drawer;
   private Toolbar toolbar;
@@ -36,17 +43,24 @@ public class HomeActivity extends AppCompatActivity
     toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
-    FloatingActionButton add = (FloatingActionButton) findViewById(R.id.add);
+    FloatingActionButton add = (FloatingActionButton) findViewById(R.id.add_btn);
     if (add != null) {
       add.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
           if (actualFragment instanceof TripsFragment) {
-            Snackbar.make(view, "Add trip", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-          } else if (actualFragment instanceof FriendsFragment){
-            Snackbar.make(view, "Add friend", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+            String str = "Simple name: " + actualFragment.getClass().getSimpleName();
+            // 1. Instantiate an AlertDialog.Builder with its constructor
+            AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+            // 2. Chain together various setter methods to set the dialog characteristics
+            builder.setMessage("AlertDialog")
+                .setTitle(str);
+            // 3. Get the AlertDialog from create()
+            AlertDialog dialog = builder.create();
+            dialog.show();
+          } else if (actualFragment instanceof FriendsFragment) {
+            Intent intent = new Intent(HomeActivity.this, NewFriendActivity.class);
+            startActivityForResult(intent, ADD_FRIEND_REQUEST);
           }
         }
       });
@@ -63,8 +77,39 @@ public class HomeActivity extends AppCompatActivity
       navigationView.setNavigationItemSelectedListener(this);
     }
 
-    Fragment trips = new TripsFragment();
-    setFragment(trips);
+    if (savedInstanceState == null) {
+      Fragment fragment = new TripsFragment();
+      setFragment(fragment);
+    }
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == ADD_FRIEND_REQUEST) {
+      Fragment fragment = new FriendsFragment();
+      setFragment(fragment);
+      if (resultCode == Activity.RESULT_OK) {
+        Toast.makeText(HomeActivity.this, R.string.friend_created_toast, Toast.LENGTH_SHORT).show();
+      }
+    }
+  }
+
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    outState.putString(STATE_ACTUAL_FRAGMENT, actualFragment.getClass().getSimpleName());
+    super.onSaveInstanceState(outState);
+  }
+
+  @Override
+  protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    super.onRestoreInstanceState(savedInstanceState);
+    String className = savedInstanceState.getString(STATE_ACTUAL_FRAGMENT);
+    Fragment fragment = new TripsFragment();
+    if (className != null && className.equals(FriendsFragment.class.getSimpleName())) {
+      fragment = new FriendsFragment();
+    }
+    setFragment(fragment);
   }
 
   @Override

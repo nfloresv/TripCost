@@ -11,9 +11,19 @@
   <!--menu-->
   <string name="action_settings">Settings</string>
 
-  <!--activities && actionbar titles-->
+  <!--fragment titles-->
   <string name="trips_fragment">Trips</string>
   <string name="friends_fragment">Friends</string>
+
+  <!--new friend activity-->
+  <string name="new_friend_activity">New Friend</string>
+  <string name="new_friend_name">Name</string>
+  <string name="save_friend_btn">Save</string>
+  <string name="cancel_friend_btn">Cancel</string>
+  <string name="friend_image">Friend Image</string>
+  <string name="friend_created_toast">Friend successfully saved</string>
+  <string name="error_friend_name_toast">You must provide a name for the friend</string>
+  <string name="error_saving_friend_toast">Something went wrong. We could not save the friend</string>
 
   <!--new strings-->
 </resources>
