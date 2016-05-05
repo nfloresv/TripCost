@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="cl.flores.nicolas.tripcost.activities.ViewFriendActivity"
+    tools:showIn="@layout/activity_view_friend">
+
+  <ImageView
+      android:id="@+id/view_friend_image"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_centerHorizontal="true"
+      android:contentDescription="@string/view_friend_image"
+      android:minHeight="48dp"
+      android:minWidth="48dp"
+      android:src="@drawable/ic_person"/>
+
+  <TextView
+      android:id="@+id/view_friend_name_title_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentStart="true"
+      android:layout_below="@+id/view_friend_image"
+      android:text="@string/new_friend_name"
+      android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+  <TextView
+      android:id="@+id/view_friend_name_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentStart="true"
+      android:layout_below="@+id/view_friend_name_title_tv"
+      android:layout_marginTop="@dimen/text_margin"
+      android:hint="@string/new_friend_name"
+      android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+  <!--TODO add list of trips-->
+
+</RelativeLayout>

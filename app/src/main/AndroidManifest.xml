@@ -32,14 +32,22 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-
     <activity
         android:name=".activities.NewFriendActivity"
-        android:label="@string/new_friend_activity"
+        android:label="@string/title_activity_new_friend"
         android:parentActivityName=".activities.HomeActivity">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".activities.HomeActivity"/>
+    </activity>
+    <activity
+        android:name=".activities.ViewFriendActivity"
+        android:label="@string/title_activity_view_friend"
+        android:parentActivityName=".activities.HomeActivity"
+        android:theme="@style/AppTheme.NoActionBar">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value="cl.flores.nicolas.tripcost.activities.HomeActivity"/>
     </activity>
   </application>
 

@@ -12,18 +12,21 @@
   <string name="action_settings">Settings</string>
 
   <!--fragment titles-->
-  <string name="trips_fragment">Trips</string>
-  <string name="friends_fragment">Friends</string>
+  <string name="title_fragment_trips">Trips</string>
+  <string name="title_fragment_friends">Friends</string>
 
   <!--new friend activity-->
-  <string name="new_friend_activity">New Friend</string>
+  <string name="title_activity_new_friend">New Friend</string>
   <string name="new_friend_name">Name</string>
-  <string name="save_friend_btn">Save</string>
-  <string name="cancel_friend_btn">Cancel</string>
-  <string name="friend_image">Friend Image</string>
-  <string name="friend_created_toast">Friend successfully saved</string>
-  <string name="error_friend_name_toast">You must provide a name for the friend</string>
-  <string name="error_saving_friend_toast">Something went wrong. We could not save the friend</string>
+  <string name="save_new_friend_btn">Save</string>
+  <string name="cancel_new_friend_btn">Cancel</string>
+  <string name="new_friend_image">Friend Image</string>
+  <string name="new_friend_created_toast">Friend successfully saved</string>
+  <string name="error_new_friend_name_toast">You must provide a name for the friend</string>
+  <string name="error_saving_new_friend_toast">Something went wrong. We could not save the friend</string>
 
-  <!--new strings-->
+  <!--view friend activity-->
+  <string name="title_activity_view_friend">Friend Detail</string>
+  <string name="view_friend_name">Name</string>
+  <string name="view_friend_image">Friend Image</string>
 </resources>

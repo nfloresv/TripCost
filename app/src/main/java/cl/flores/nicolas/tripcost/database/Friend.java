@@ -16,4 +16,9 @@ public class Friend extends SugarRecord {
   public String getName() {
     return name;
   }
+
+  @Override
+  public String toString() {
+    return name;
+  }
 }

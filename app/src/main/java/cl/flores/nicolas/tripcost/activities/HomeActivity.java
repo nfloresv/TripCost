@@ -29,9 +29,9 @@ public class HomeActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener,
     FriendsFragment.OnFriendListInteractionListener, TripsFragment.OnTripListInteractionListener {
 
+  public static final String FRIEND_ID_MESSAGE = "cl.flores.nicolas.tripcost.activities.FRIEND_ID";
   private final String STATE_ACTUAL_FRAGMENT = "ACTUAL_FRAGMENT";
   private final int ADD_FRIEND_REQUEST = 0x0001;
-
   private DrawerLayout drawer;
   private Toolbar toolbar;
   private Fragment actualFragment;
@@ -90,7 +90,7 @@ public class HomeActivity extends AppCompatActivity
       Fragment fragment = new FriendsFragment();
       setFragment(fragment);
       if (resultCode == Activity.RESULT_OK) {
-        Toast.makeText(HomeActivity.this, R.string.friend_created_toast, Toast.LENGTH_SHORT).show();
+        Toast.makeText(HomeActivity.this, R.string.new_friend_created_toast, Toast.LENGTH_SHORT).show();
       }
     }
   }
@@ -164,8 +164,9 @@ public class HomeActivity extends AppCompatActivity
 
   @Override
   public void onFriendListInteraction(Friend friend) {
-    Snackbar.make(getCurrentFocus(), friend.toString(), Snackbar.LENGTH_LONG)
-        .setAction("Action", null).show();
+    Intent intent = new Intent(HomeActivity.this, ViewFriendActivity.class);
+    intent.putExtra(FRIEND_ID_MESSAGE, friend.getId());
+    startActivity(intent);
   }
 
   @Override
@@ -179,9 +180,9 @@ public class HomeActivity extends AppCompatActivity
     fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
     actualFragment = fragment;
     if (fragment instanceof TripsFragment) {
-      toolbar.setTitle(R.string.trips_fragment);
+      toolbar.setTitle(R.string.title_fragment_trips);
     } else if (fragment instanceof FriendsFragment) {
-      toolbar.setTitle(R.string.friends_fragment);
+      toolbar.setTitle(R.string.title_fragment_friends);
     }
   }
 }

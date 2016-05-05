@@ -5,6 +5,7 @@
   <item name="ic_card_travel" type="drawable">@drawable/ic_card_travel</item>
   <item name="ic_clear" type="drawable">@drawable/ic_clear</item>
   <item name="ic_done" type="drawable">@drawable/ic_done</item>
+  <item name="ic_edit" type="drawable">@drawable/ic_edit</item>
   <item name="ic_group" type="drawable">@drawable/ic_group</item>
   <item name="ic_group_add" type="drawable">@drawable/ic_group_add</item>
   <item name="ic_person" type="drawable">@drawable/ic_person</item>

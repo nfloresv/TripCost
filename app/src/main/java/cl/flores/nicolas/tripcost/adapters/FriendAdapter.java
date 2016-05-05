@@ -23,8 +23,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
   private final OnFriendListInteractionListener mListener;
 
   public FriendAdapter(OnFriendListInteractionListener listener) {
-    friendList = Friend.listAll(Friend.class);
-    mListener = listener;
+    this(Friend.listAll(Friend.class), listener);
   }
 
   public FriendAdapter(List<Friend> friends, OnFriendListInteractionListener listener) {
