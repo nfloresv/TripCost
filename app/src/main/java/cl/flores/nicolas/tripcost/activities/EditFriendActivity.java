@@ -1,6 +1,7 @@
 package cl.flores.nicolas.tripcost.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,14 +10,22 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import cl.flores.nicolas.tripcost.R;
+import cl.flores.nicolas.tripcost.common.Constants;
 import cl.flores.nicolas.tripcost.database.Friend;
 
-public class NewFriendActivity extends AppCompatActivity {
+public class EditFriendActivity extends AppCompatActivity {
+  private long friendId;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_compose_friend);
+
+    Intent intent = getIntent();
+    friendId = intent.getLongExtra(Constants.FRIEND_ID_MESSAGE, Constants.DEFAULT_ID);
+    if (friendId == Constants.DEFAULT_ID) {
+      finish();
+    }
 
     ImageButton saveBtn = (ImageButton) findViewById(R.id.save_friend_btn);
     if (saveBtn != null) {
@@ -39,15 +48,26 @@ public class NewFriendActivity extends AppCompatActivity {
     }
   }
 
+  @Override
+  protected void onStart() {
+    super.onStart();
+    Friend friend = Friend.findById(Friend.class, friendId);
+    EditText nameET = (EditText) findViewById(R.id.compose_friend_name_et);
+    if (friend != null && nameET != null && nameET.getText().length() == 0) {
+      nameET.setText(friend.getName());
+    }
+  }
+
   public void saveFriend(View view) {
     EditText nameET = (EditText) this.findViewById(R.id.compose_friend_name_et);
     if (nameET == null || nameET.getText().length() == 0) {
-      Toast.makeText(NewFriendActivity.this, R.string.error_new_friend_name_toast, Toast.LENGTH_SHORT).show();
+      Toast.makeText(EditFriendActivity.this, R.string.error_new_friend_name_toast, Toast.LENGTH_SHORT).show();
       return;
     }
-    Friend friend = new Friend(nameET.getText().toString());
+    Friend friend = Friend.findById(Friend.class, friendId);
+    friend.setName(nameET.getText().toString());
     if (friend.save() <= 0) {
-      Toast.makeText(NewFriendActivity.this, R.string.error_saving_new_friend_toast, Toast.LENGTH_LONG).show();
+      Toast.makeText(EditFriendActivity.this, R.string.error_saving_new_friend_toast, Toast.LENGTH_LONG).show();
       return;
     }
     setResult(Activity.RESULT_OK);

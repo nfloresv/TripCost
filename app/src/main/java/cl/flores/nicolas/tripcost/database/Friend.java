@@ -4,7 +4,7 @@ import com.orm.SugarRecord;
 
 public class Friend extends SugarRecord {
 
-  String name;
+  private String name;
 
   public Friend() {
   }
@@ -15,6 +15,10 @@ public class Friend extends SugarRecord {
 
   public String getName() {
     return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   @Override

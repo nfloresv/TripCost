@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import cl.flores.nicolas.tripcost.R;
+import cl.flores.nicolas.tripcost.common.Constants;
 import cl.flores.nicolas.tripcost.database.Friend;
 import cl.flores.nicolas.tripcost.database.Trip;
 import cl.flores.nicolas.tripcost.fragments.FriendsFragment;
@@ -29,9 +30,6 @@ public class HomeActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener,
     FriendsFragment.OnFriendListInteractionListener, TripsFragment.OnTripListInteractionListener {
 
-  public static final String FRIEND_ID_MESSAGE = "cl.flores.nicolas.tripcost.activities.FRIEND_ID";
-  private final String STATE_ACTUAL_FRAGMENT = "ACTUAL_FRAGMENT";
-  private final int ADD_FRIEND_REQUEST = 0x0001;
   private DrawerLayout drawer;
   private Toolbar toolbar;
   private Fragment actualFragment;
@@ -48,20 +46,7 @@ public class HomeActivity extends AppCompatActivity
       add.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-          if (actualFragment instanceof TripsFragment) {
-            String str = "Simple name: " + actualFragment.getClass().getSimpleName();
-            // 1. Instantiate an AlertDialog.Builder with its constructor
-            AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-            // 2. Chain together various setter methods to set the dialog characteristics
-            builder.setMessage("AlertDialog")
-                .setTitle(str);
-            // 3. Get the AlertDialog from create()
-            AlertDialog dialog = builder.create();
-            dialog.show();
-          } else if (actualFragment instanceof FriendsFragment) {
-            Intent intent = new Intent(HomeActivity.this, NewFriendActivity.class);
-            startActivityForResult(intent, ADD_FRIEND_REQUEST);
-          }
+          addButton(view);
         }
       });
     }
@@ -86,7 +71,7 @@ public class HomeActivity extends AppCompatActivity
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    if (requestCode == ADD_FRIEND_REQUEST) {
+    if (requestCode == Constants.ADD_FRIEND_REQUEST) {
       Fragment fragment = new FriendsFragment();
       setFragment(fragment);
       if (resultCode == Activity.RESULT_OK) {
@@ -97,14 +82,14 @@ public class HomeActivity extends AppCompatActivity
 
   @Override
   protected void onSaveInstanceState(Bundle outState) {
-    outState.putString(STATE_ACTUAL_FRAGMENT, actualFragment.getClass().getSimpleName());
+    outState.putString(Constants.STATE_DISPLAYED_FRAGMENT, actualFragment.getClass().getSimpleName());
     super.onSaveInstanceState(outState);
   }
 
   @Override
   protected void onRestoreInstanceState(Bundle savedInstanceState) {
     super.onRestoreInstanceState(savedInstanceState);
-    String className = savedInstanceState.getString(STATE_ACTUAL_FRAGMENT);
+    String className = savedInstanceState.getString(Constants.STATE_DISPLAYED_FRAGMENT);
     Fragment fragment = new TripsFragment();
     if (className != null && className.equals(FriendsFragment.class.getSimpleName())) {
       fragment = new FriendsFragment();
@@ -165,7 +150,7 @@ public class HomeActivity extends AppCompatActivity
   @Override
   public void onFriendListInteraction(Friend friend) {
     Intent intent = new Intent(HomeActivity.this, ViewFriendActivity.class);
-    intent.putExtra(FRIEND_ID_MESSAGE, friend.getId());
+    intent.putExtra(Constants.FRIEND_ID_MESSAGE, friend.getId());
     startActivity(intent);
   }
 
@@ -183,6 +168,23 @@ public class HomeActivity extends AppCompatActivity
       toolbar.setTitle(R.string.title_fragment_trips);
     } else if (fragment instanceof FriendsFragment) {
       toolbar.setTitle(R.string.title_fragment_friends);
+    }
+  }
+
+  private void addButton(View view) {
+    if (actualFragment instanceof TripsFragment) {
+      String str = "Simple name: " + actualFragment.getClass().getSimpleName();
+      // 1. Instantiate an AlertDialog.Builder with its constructor
+      AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+      // 2. Chain together various setter methods to set the dialog characteristics
+      builder.setMessage("AlertDialog")
+          .setTitle(str);
+      // 3. Get the AlertDialog from create()
+      AlertDialog dialog = builder.create();
+      dialog.show();
+    } else if (actualFragment instanceof FriendsFragment) {
+      Intent intent = new Intent(HomeActivity.this, NewFriendActivity.class);
+      startActivityForResult(intent, Constants.ADD_FRIEND_REQUEST);
     }
   }
 }

@@ -30,7 +30,7 @@
       android:layout_height="wrap_content"
       android:layout_alignParentStart="true"
       android:layout_below="@+id/view_friend_image"
-      android:text="@string/new_friend_name"
+      android:text="@string/compose_friend_name"
       android:textAppearance="?android:attr/textAppearanceLarge"/>
 
   <TextView
@@ -41,7 +41,7 @@
       android:layout_alignParentStart="true"
       android:layout_below="@+id/view_friend_name_title_tv"
       android:layout_marginTop="@dimen/text_margin"
-      android:hint="@string/new_friend_name"
+      android:hint="@string/compose_friend_name"
       android:textAppearance="?android:attr/textAppearanceMedium"/>
 
   <!--TODO add list of trips-->

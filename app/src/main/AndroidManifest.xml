@@ -47,7 +47,15 @@
         android:theme="@style/AppTheme.NoActionBar">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
-          android:value="cl.flores.nicolas.tripcost.activities.HomeActivity"/>
+          android:value=".activities.HomeActivity"/>
+    </activity>
+    <activity
+        android:name=".activities.EditFriendActivity"
+        android:label="@string/title_activity_edit_friend"
+        android:parentActivityName=".activities.ViewFriendActivity">
+      <meta-data
+        android:name="android.support.PARENT_ACTIVITY"
+          android:value=".activities.ViewFriendActivity"/>
     </activity>
   </application>
 
