@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="cl.flores.nicolas.tripcost.activities.NewTripActivity">
+
+  <TextView
+      android:id="@+id/compose_trip_name_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentStart="true"
+      android:layout_alignParentTop="true"
+      android:labelFor="@+id/compose_trip_name_et"
+      android:text="@string/compose_trip_name"
+      android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+  <EditText
+      android:id="@+id/compose_trip_name_et"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentStart="true"
+      android:layout_below="@+id/compose_trip_name_tv"
+      android:layout_marginTop="@dimen/text_margin"
+      android:ems="10"
+      android:hint="@string/compose_friend_name"
+      android:inputType="text|textCapWords|textAutoComplete|textPersonName|textAutoCorrect"/>
+
+  <TextView
+      android:id="@+id/compose_trip_description"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentStart="true"
+      android:layout_below="@+id/compose_trip_name_et"
+      android:layout_marginTop="@dimen/text_margin"
+      android:labelFor="@+id/compose_trip_description_et"
+      android:text="@string/compose_trip_description"
+      android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+  <EditText
+      android:id="@+id/compose_trip_description_et"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentStart="true"
+      android:layout_below="@+id/compose_trip_description"
+      android:layout_marginTop="@dimen/text_margin"
+      android:ems="10"
+      android:hint="@string/compose_trip_description"
+      android:inputType="textMultiLine|textAutoComplete|textAutoCorrect"
+      android:lines="3"
+      android:maxLines="3"
+      android:textIsSelectable="true"/>
+
+  <TextView
+      android:id="@+id/compose_trip_start_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentStart="true"
+      android:layout_below="@+id/compose_trip_description_et"
+      android:layout_marginTop="@dimen/text_margin"
+      android:labelFor="@+id/compose_trip_start_date_et"
+      android:text="@string/compose_trip_start_date"
+      android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+  <TextView
+      android:id="@+id/compose_trip_end_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_below="@+id/compose_trip_description_et"
+      android:layout_marginTop="@dimen/text_margin"
+      android:labelFor="@+id/compose_trip_end_date_et"
+      android:text="@string/compose_trip_end_date"
+      android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/compose_trip_start_date"
+      android:layout_marginTop="@dimen/text_margin"
+      android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/compose_trip_start_date_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
+        android:ems="10"
+        android:inputType="date"
+        android:focusable="false"/>
+
+    <EditText
+        android:id="@+id/compose_trip_end_date_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
+        android:clickable="false"
+        android:ems="10"
+        android:inputType="date"
+        android:focusable="false"/>
+  </LinearLayout>
+
+  <ImageButton
+      android:id="@+id/save_trip_btn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_alignParentEnd="true"
+      android:background="@drawable/primary_rounded_btn"
+      android:clickable="true"
+      android:contentDescription="@string/save_trip_btn"
+      android:foregroundGravity="center_vertical|center_horizontal"
+      android:padding="@dimen/text_margin"
+      android:src="@drawable/ic_done"/>
+
+  <ImageButton
+      android:id="@+id/cancel_trip_btn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_alignParentStart="true"
+      android:background="@drawable/secondary_rounded_btn"
+      android:clickable="true"
+      android:contentDescription="@string/cancel_trip_btn"
+      android:foregroundGravity="center_vertical|center_horizontal"
+      android:padding="@dimen/text_margin"
+      android:src="@drawable/ic_clear"/>
+
+</RelativeLayout>

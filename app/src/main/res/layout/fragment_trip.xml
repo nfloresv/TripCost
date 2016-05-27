@@ -36,8 +36,7 @@
       android:layout_marginStart="@dimen/text_margin"
       android:ellipsize="end"
       android:maxLines="2"
-      android:textAppearance="?attr/textAppearanceListItem"
-      />
+      android:textAppearance="?attr/textAppearanceListItem"/>
 
   <TextView
       android:id="@+id/trip_id"

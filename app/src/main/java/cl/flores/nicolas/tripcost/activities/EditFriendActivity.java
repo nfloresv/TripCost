@@ -61,13 +61,13 @@ public class EditFriendActivity extends AppCompatActivity {
   public void saveFriend(View view) {
     EditText nameET = (EditText) this.findViewById(R.id.compose_friend_name_et);
     if (nameET == null || nameET.getText().length() == 0) {
-      Toast.makeText(EditFriendActivity.this, R.string.error_new_friend_name_toast, Toast.LENGTH_SHORT).show();
+      Toast.makeText(EditFriendActivity.this, R.string.error_friend_name_toast, Toast.LENGTH_SHORT).show();
       return;
     }
     Friend friend = Friend.findById(Friend.class, friendId);
     friend.setName(nameET.getText().toString());
     if (friend.save() <= 0) {
-      Toast.makeText(EditFriendActivity.this, R.string.error_saving_new_friend_toast, Toast.LENGTH_LONG).show();
+      Toast.makeText(EditFriendActivity.this, R.string.error_saving_friend_toast, Toast.LENGTH_LONG).show();
       return;
     }
     setResult(Activity.RESULT_OK);

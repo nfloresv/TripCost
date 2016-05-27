@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -75,7 +74,13 @@ public class HomeActivity extends AppCompatActivity
       Fragment fragment = new FriendsFragment();
       setFragment(fragment);
       if (resultCode == Activity.RESULT_OK) {
-        Toast.makeText(HomeActivity.this, R.string.new_friend_created_toast, Toast.LENGTH_SHORT).show();
+        Toast.makeText(HomeActivity.this, R.string.friend_created_toast, Toast.LENGTH_SHORT).show();
+      }
+    } else if (requestCode == Constants.ADD_TRIP_REQUEST) {
+      Fragment fragment = new TripsFragment();
+      setFragment(fragment);
+      if (resultCode == Activity.RESULT_OK) {
+        Toast.makeText(HomeActivity.this, R.string.trip_created_toast, Toast.LENGTH_SHORT).show();
       }
     }
   }
@@ -173,15 +178,8 @@ public class HomeActivity extends AppCompatActivity
 
   private void addButton(View view) {
     if (actualFragment instanceof TripsFragment) {
-      String str = "Simple name: " + actualFragment.getClass().getSimpleName();
-      // 1. Instantiate an AlertDialog.Builder with its constructor
-      AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-      // 2. Chain together various setter methods to set the dialog characteristics
-      builder.setMessage("AlertDialog")
-          .setTitle(str);
-      // 3. Get the AlertDialog from create()
-      AlertDialog dialog = builder.create();
-      dialog.show();
+      Intent intent = new Intent(HomeActivity.this, NewTripActivity.class);
+      startActivityForResult(intent, Constants.ADD_TRIP_REQUEST);
     } else if (actualFragment instanceof FriendsFragment) {
       Intent intent = new Intent(HomeActivity.this, NewFriendActivity.class);
       startActivityForResult(intent, Constants.ADD_FRIEND_REQUEST);

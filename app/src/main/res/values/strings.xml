@@ -22,12 +22,26 @@
   <string name="save_friend_btn">Save</string>
   <string name="cancel_friend_btn">Cancel</string>
   <string name="compose_friend_image">Friend Image</string>
-  <string name="new_friend_created_toast">Friend successfully saved</string>
-  <string name="error_new_friend_name_toast">You must provide a name for the friend</string>
-  <string name="error_saving_new_friend_toast">Something went wrong. We could not save the friend</string>
+  <string name="friend_created_toast">Friend successfully saved</string>
+  <string name="error_friend_name_toast">You must provide a name for the friend</string>
+  <string name="error_saving_friend_toast">Something went wrong. We could not save the friend</string>
 
   <!--view friend activity-->
   <string name="title_activity_view_friend">Friend Detail</string>
   <string name="view_friend_name">Name</string>
   <string name="view_friend_image">Friend Image</string>
+
+  <!--compose (new/edit) trip activity-->
+  <string name="title_activity_new_trip">New trip</string>
+  <string name="compose_trip_name">Name</string>
+  <string name="compose_trip_description">Description</string>
+  <string name="compose_trip_participants">Participants</string>
+  <string name="compose_trip_start_date">Start</string>
+  <string name="compose_trip_end_date">End</string>
+  <string name="save_trip_btn">Save</string>
+  <string name="cancel_trip_btn">Cancel</string>
+  <string name="trip_created_toast">Trip successfully saved</string>
+  <string name="error_trip_name_toast">You must provide a name for the trip</string>
+  <string name="error_trip_date_toast">You must provide start and end dates</string>
+  <string name="error_saving_trip_toast">Something went wrong. We could not save the trip</string>
 </resources>

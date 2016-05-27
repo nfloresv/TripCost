@@ -54,8 +54,16 @@
         android:label="@string/title_activity_edit_friend"
         android:parentActivityName=".activities.ViewFriendActivity">
       <meta-data
-        android:name="android.support.PARENT_ACTIVITY"
+          android:name="android.support.PARENT_ACTIVITY"
           android:value=".activities.ViewFriendActivity"/>
+    </activity>
+    <activity
+        android:name=".activities.NewTripActivity"
+        android:label="@string/title_activity_new_trip"
+        android:parentActivityName=".activities.HomeActivity">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".activities.HomeActivity"/>
     </activity>
   </application>
 
