@@ -28,10 +28,10 @@ public class NewTripActivity extends AppCompatActivity {
     setContentView(R.layout.activity_compose_trip);
 
     final Calendar calendar = Calendar.getInstance();
-    SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT, Locale.getDefault());
+    final SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT, Locale.getDefault());
 
-    startDate = new DatePickerFragment(R.id.compose_trip_start_date_et);
-    endDate = new DatePickerFragment(R.id.compose_trip_end_date_et);
+    startDate = DatePickerFragment.newInstance(R.id.compose_trip_start_date_et);
+    endDate = DatePickerFragment.newInstance(R.id.compose_trip_end_date_et);
 
     EditText startDateET = (EditText) findViewById(R.id.compose_trip_start_date_et);
     if (startDateET != null) {
@@ -107,4 +107,6 @@ public class NewTripActivity extends AppCompatActivity {
     setResult(Activity.RESULT_CANCELED);
     finish();
   }
+
+//  https://developer.android.com/guide/topics/ui/dialogs.html?hl=es
 }

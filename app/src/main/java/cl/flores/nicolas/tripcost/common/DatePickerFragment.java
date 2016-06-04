@@ -14,20 +14,42 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import cl.flores.nicolas.tripcost.common.Constants;
-
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Fragment} subclass to select a date.
+ * Use the {@link DatePickerFragment#newInstance} factory method to
+ * create an instance of this fragment.
  */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+  private static final String ARG_EDITTEXT_ID = "edittext_id";
 
   private Calendar date;
   private int editTextID;
 
-  // TODO convert to factory method
-  public DatePickerFragment(int editTextID) {
+  public DatePickerFragment() {
+  }
+
+  /**
+   * Use this factory method to create a new instance of
+   * this fragment using the provided parameters.
+   *
+   * @param edittext_id The ID of the target Edit Text.
+   * @return A new instance of fragment DatePickerFragment.
+   */
+  public static DatePickerFragment newInstance(int edittext_id) {
+    DatePickerFragment fragment = new DatePickerFragment();
+    Bundle args = new Bundle();
+    args.putInt(ARG_EDITTEXT_ID, edittext_id);
+    fragment.setArguments(args);
+    return fragment;
+  }
+
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    if (getArguments() != null) {
+      editTextID = getArguments().getInt(ARG_EDITTEXT_ID);
+    }
     date = null;
-    this.editTextID = editTextID;
   }
 
   @NonNull
