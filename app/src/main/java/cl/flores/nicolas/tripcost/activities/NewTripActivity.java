@@ -2,25 +2,33 @@ package cl.flores.nicolas.tripcost.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import cl.flores.nicolas.tripcost.R;
 import cl.flores.nicolas.tripcost.common.Constants;
 import cl.flores.nicolas.tripcost.common.DatePickerFragment;
+import cl.flores.nicolas.tripcost.database.Friend;
 import cl.flores.nicolas.tripcost.database.Trip;
+import cl.flores.nicolas.tripcost.fragments.FriendPickerDialogFragment;
 
-public class NewTripActivity extends AppCompatActivity {
+public class NewTripActivity extends AppCompatActivity implements FriendPickerDialogFragment.NoticeDialogListener {
   private DatePickerFragment startDate;
   private DatePickerFragment endDate;
+  private FriendPickerDialogFragment friendPicker;
+  private TextView participantsTV;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,7 @@ public class NewTripActivity extends AppCompatActivity {
 
     startDate = DatePickerFragment.newInstance(R.id.compose_trip_start_date_et);
     endDate = DatePickerFragment.newInstance(R.id.compose_trip_end_date_et);
+    friendPicker = FriendPickerDialogFragment.newInstance();
 
     EditText startDateET = (EditText) findViewById(R.id.compose_trip_start_date_et);
     if (startDateET != null) {
@@ -51,6 +60,17 @@ public class NewTripActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
           endDate.show(getSupportFragmentManager(), Constants.COMPOSE_TRIP_END_DATE_PICKER);
+        }
+      });
+    }
+
+    participantsTV = (TextView) findViewById(R.id.compose_trip_participants_count);
+    if (participantsTV != null) {
+      participantsTV.setText(String.format(getString(R.string.compose_trip_participants_count), 0));
+      participantsTV.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          selectParticipants(v);
         }
       });
     }
@@ -108,5 +128,20 @@ public class NewTripActivity extends AppCompatActivity {
     finish();
   }
 
+  public void selectParticipants(View view) {
+    friendPicker.show(getSupportFragmentManager(), Constants.FRIEND_PICKER_DIALOG);
+  }
+
+  @Override
+  public void onDialogPositiveClick(DialogFragment dialog, List<Friend> friendList, ArrayList<Integer> selectedItems) {
+    participantsTV.setText(String.format(getString(R.string.compose_trip_participants_count), selectedItems.size()));
+    StringBuilder buffer = new StringBuilder();
+    for (Integer selectedItem : selectedItems) {
+      String name = friendList.get(selectedItem).getName();
+      buffer.append(name);
+      buffer.append(", ");
+    }
+    Toast.makeText(getApplicationContext(), buffer.toString(), Toast.LENGTH_LONG).show();
+  }
 //  https://developer.android.com/guide/topics/ui/dialogs.html?hl=es
 }

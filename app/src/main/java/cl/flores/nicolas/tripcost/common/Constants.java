@@ -7,6 +7,7 @@ public class Constants {
   public static final String COMPOSE_TRIP_START_DATE_PICKER = "cl.flores.nicolas.tripcost.activities.START_DATE";
   public static final String COMPOSE_TRIP_END_DATE_PICKER = "cl.flores.nicolas.tripcost.activities.END_DATE";
   public static final String DATE_FORMAT = "dd/MM/yy";
+  public static final String FRIEND_PICKER_DIALOG = "cl.flores.nicolas.tripcost.fragments.FRIEND_PICKER_DIALOG";
 
   // Numbers
   public static final long DEFAULT_ID = 0;

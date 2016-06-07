@@ -36,6 +36,7 @@
   <string name="compose_trip_name">Name</string>
   <string name="compose_trip_description">Description</string>
   <string name="compose_trip_participants">Participants</string>
+  <string name="compose_trip_participants_count">(%d) selected</string>
   <string name="compose_trip_start_date">Start</string>
   <string name="compose_trip_end_date">End</string>
   <string name="save_trip_btn">Save</string>
@@ -43,5 +44,9 @@
   <string name="trip_created_toast">Trip successfully saved</string>
   <string name="error_trip_name_toast">You must provide a name for the trip</string>
   <string name="error_trip_date_toast">You must provide start and end dates</string>
-  <string name="error_saving_trip_toast">Something went wrong. We could not save the trip</string>
+
+  <!--FriendPickerDialogFragment-->
+  <string name="pick_friend_dialog_title">Select Participants</string>
+  <string name="pick_friend_dialog_positive_button">OK</string>
+  <string name="pick_friend_dialog_negative_button">Cancel</string>
 </resources>
