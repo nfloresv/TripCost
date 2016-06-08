@@ -44,6 +44,9 @@
   <string name="trip_created_toast">Trip successfully saved</string>
   <string name="error_trip_name_toast">You must provide a name for the trip</string>
   <string name="error_trip_date_toast">You must provide start and end dates</string>
+  <string name="error_trip_participants_toast">You must select at least one participant</string>
+  <string name="error_saving_trip_toast">Something went wrong. We could not save the trip</string>
+  <string name="error_saving_friend_trip_toast">Something went wrong. We could not save the participant</string>
 
   <!--FriendPickerDialogFragment-->
   <string name="pick_friend_dialog_title">Select Participants</string>

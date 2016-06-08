@@ -21,6 +21,7 @@ import cl.flores.nicolas.tripcost.R;
 import cl.flores.nicolas.tripcost.common.Constants;
 import cl.flores.nicolas.tripcost.common.DatePickerFragment;
 import cl.flores.nicolas.tripcost.database.Friend;
+import cl.flores.nicolas.tripcost.database.FriendTrip;
 import cl.flores.nicolas.tripcost.database.Trip;
 import cl.flores.nicolas.tripcost.fragments.FriendPickerDialogFragment;
 
@@ -29,11 +30,14 @@ public class NewTripActivity extends AppCompatActivity implements FriendPickerDi
   private DatePickerFragment endDate;
   private FriendPickerDialogFragment friendPicker;
   private TextView participantsTV;
+  private List<Friend> selectedParticipants;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_compose_trip);
+
+    selectedParticipants = new ArrayList<>();
 
     final Calendar calendar = Calendar.getInstance();
     final SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT, Locale.getDefault());
@@ -106,6 +110,9 @@ public class NewTripActivity extends AppCompatActivity implements FriendPickerDi
     } else if (startDate.getDate() == null || endDate.getDate() == null) {
       Toast.makeText(NewTripActivity.this, R.string.error_trip_date_toast, Toast.LENGTH_SHORT).show();
       return;
+    } else if (selectedParticipants.isEmpty()) {
+      Toast.makeText(NewTripActivity.this, R.string.error_trip_participants_toast, Toast.LENGTH_SHORT).show();
+      return;
     }
 
     String name = nameET.getText().toString();
@@ -114,10 +121,17 @@ public class NewTripActivity extends AppCompatActivity implements FriendPickerDi
     Date end = endDate.getDate().getTime();
 
     Trip trip = new Trip(name, description, start, end);
-//    if (trip.save() <= 0) {
-//      Toast.makeText(NewTripActivity.this, R.string.error_saving_trip_toast, Toast.LENGTH_LONG).show();
-//      return;
-//    }
+    if (trip.save() <= 0) {
+      Toast.makeText(NewTripActivity.this, R.string.error_saving_trip_toast, Toast.LENGTH_LONG).show();
+      return;
+    }
+    for (Friend participant : selectedParticipants) {
+      FriendTrip friendTrip = new FriendTrip(trip, participant);
+      if (friendTrip.save() <= 0) {
+        Toast.makeText(NewTripActivity.this, R.string.error_saving_friend_trip_toast, Toast.LENGTH_SHORT).show();
+        // TODO stop everything if the participant can't be save?
+      }
+    }
 
     setResult(Activity.RESULT_OK);
     finish();
@@ -134,14 +148,11 @@ public class NewTripActivity extends AppCompatActivity implements FriendPickerDi
 
   @Override
   public void onDialogPositiveClick(DialogFragment dialog, List<Friend> friendList, ArrayList<Integer> selectedItems) {
+    selectedParticipants.clear();
     participantsTV.setText(String.format(getString(R.string.compose_trip_participants_count), selectedItems.size()));
-    StringBuilder buffer = new StringBuilder();
     for (Integer selectedItem : selectedItems) {
-      String name = friendList.get(selectedItem).getName();
-      buffer.append(name);
-      buffer.append(", ");
+      Friend friend = friendList.get(selectedItem);
+      selectedParticipants.add(friend);
     }
-    Toast.makeText(getApplicationContext(), buffer.toString(), Toast.LENGTH_LONG).show();
   }
-//  https://developer.android.com/guide/topics/ui/dialogs.html?hl=es
 }

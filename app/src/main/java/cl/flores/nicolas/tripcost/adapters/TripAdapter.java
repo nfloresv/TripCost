@@ -6,9 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import cl.flores.nicolas.tripcost.R;
+import cl.flores.nicolas.tripcost.common.Constants;
 import cl.flores.nicolas.tripcost.database.Trip;
 import cl.flores.nicolas.tripcost.fragments.TripsFragment.OnTripListInteractionListener;
 
@@ -40,11 +44,14 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder> {
 
   @Override
   public void onBindViewHolder(final ViewHolder holder, int position) {
+    final SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT, Locale.getDefault());
+    final Date date = mValues.get(position).getStart();
+
     holder.trip = mValues.get(position);
     holder.tripId.setText(String.valueOf(mValues.get(position).getId()));
     holder.tripName.setText(mValues.get(position).getName());
     holder.tripDescription.setText(mValues.get(position).getDescription());
-    holder.tripDate.setText(mValues.get(position).getStart().toString());
+    holder.tripDate.setText(dateFormat.format(date));
 
     holder.mView.setOnClickListener(new View.OnClickListener() {
       @Override
