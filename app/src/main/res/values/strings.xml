@@ -11,6 +11,11 @@
   <!--menu-->
   <string name="action_settings">Settings</string>
 
+  <!--FriendPickerDialogFragment-->
+  <string name="pick_friend_dialog_title">Select Participants</string>
+  <string name="pick_friend_dialog_positive_button">OK</string>
+  <string name="pick_friend_dialog_negative_button">Cancel</string>
+
   <!--fragment titles-->
   <string name="title_fragment_trips">Trips</string>
   <string name="title_fragment_friends">Friends</string>
@@ -48,8 +53,6 @@
   <string name="error_saving_trip_toast">Something went wrong. We could not save the trip</string>
   <string name="error_saving_friend_trip_toast">Something went wrong. We could not save the participant</string>
 
-  <!--FriendPickerDialogFragment-->
-  <string name="pick_friend_dialog_title">Select Participants</string>
-  <string name="pick_friend_dialog_positive_button">OK</string>
-  <string name="pick_friend_dialog_negative_button">Cancel</string>
+  <!--view trip activity-->
+  <string name="title_activity_view_trip">Trip Detail</string>
 </resources>

@@ -129,7 +129,6 @@ public class NewTripActivity extends AppCompatActivity implements FriendPickerDi
       FriendTrip friendTrip = new FriendTrip(trip, participant);
       if (friendTrip.save() <= 0) {
         Toast.makeText(NewTripActivity.this, R.string.error_saving_friend_trip_toast, Toast.LENGTH_SHORT).show();
-        // TODO stop everything if the participant can't be save?
       }
     }
 

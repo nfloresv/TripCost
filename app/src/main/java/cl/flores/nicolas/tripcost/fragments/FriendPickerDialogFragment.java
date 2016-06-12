@@ -53,14 +53,14 @@ public class FriendPickerDialogFragment extends DialogFragment {
    * Use this factory method to create a new instance of
    * this fragment using the provided parameters.
    *
-   * @param newTrip Define if this Dialog is going to be used in a new Trip Activity.
-   * @param tripID  The ID of Trip.
+   * @param editTrip Define if this Dialog is going to be used in a new Trip Activity.
+   * @param tripID   The ID of Trip.
    * @return A new instance of fragment FriendPickerDialogFragment.
    */
-  public static FriendPickerDialogFragment newInstance(boolean newTrip, int tripID) {
+  public static FriendPickerDialogFragment newInstance(boolean editTrip, int tripID) {
     FriendPickerDialogFragment fragment = new FriendPickerDialogFragment();
     Bundle args = new Bundle();
-    args.putBoolean(ARG_EDIT_TRIP, newTrip);
+    args.putBoolean(ARG_EDIT_TRIP, editTrip);
     args.putInt(ARG_TRIP_ID, tripID);
     fragment.setArguments(args);
     return fragment;

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -161,8 +160,9 @@ public class HomeActivity extends AppCompatActivity
 
   @Override
   public void onTripListInteraction(Trip trip) {
-    Snackbar.make(getCurrentFocus(), trip.toString(), Snackbar.LENGTH_LONG)
-        .setAction("Action", null).show();
+    Intent intent = new Intent(HomeActivity.this, ViewTripActivity.class);
+    intent.putExtra(Constants.TRIP_ID_MESSAGE, trip.getId());
+    startActivity(intent);
   }
 
   private void setFragment(Fragment fragment) {

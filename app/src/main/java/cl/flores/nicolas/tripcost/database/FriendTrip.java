@@ -32,9 +32,8 @@ public class FriendTrip extends SugarRecord {
 
   @Override
   public String toString() {
-    String sb = "FriendTrip{" + "trip = " + trip.getName() +
+    return "FriendTrip{" + "trip = " + trip.getName() +
         ", friend = " + friend.getName() +
         '}';
-    return sb;
   }
 }

@@ -65,6 +65,15 @@
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".activities.HomeActivity"/>
     </activity>
+    <activity
+        android:name=".activities.ViewTripActivity"
+        android:label="@string/title_activity_view_trip"
+        android:parentActivityName=".activities.HomeActivity"
+        android:theme="@style/AppTheme.NoActionBar">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".activities.HomeActivity"/>
+    </activity>
   </application>
 
 </manifest>
