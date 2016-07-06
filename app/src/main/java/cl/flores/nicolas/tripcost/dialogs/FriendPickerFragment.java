@@ -1,4 +1,4 @@
-package cl.flores.nicolas.tripcost.fragments;
+package cl.flores.nicolas.tripcost.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -18,12 +18,12 @@ import cl.flores.nicolas.tripcost.database.Friend;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link NoticeDialogListener} interface
+ * {@link OnFriendPickerFragmentListener} interface
  * to handle interaction events.
- * Use the {@link FriendPickerDialogFragment#newInstance} factory method to
+ * Use the {@link FriendPickerFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FriendPickerDialogFragment extends DialogFragment {
+public class FriendPickerFragment extends DialogFragment {
   private static final String ARG_EDIT_TRIP = "edit_trip";
   private static final String ARG_TRIP_ID = "trip_id";
 
@@ -33,9 +33,9 @@ public class FriendPickerDialogFragment extends DialogFragment {
   private ArrayList<Integer> selectedItems;
   private boolean[] selectedItemsState;
 
-  private NoticeDialogListener mListener;
+  private OnFriendPickerFragmentListener mListener;
 
-  public FriendPickerDialogFragment() {
+  public FriendPickerFragment() {
     // Required empty public constructor
   }
 
@@ -43,10 +43,10 @@ public class FriendPickerDialogFragment extends DialogFragment {
    * Use this factory method to create a new instance of
    * this fragment using the provided parameters.
    *
-   * @return A new instance of fragment FriendPickerDialogFragment.
+   * @return A new instance of fragment FriendPickerFragment.
    */
-  public static FriendPickerDialogFragment newInstance() {
-    return FriendPickerDialogFragment.newInstance(false, 0);
+  public static FriendPickerFragment newInstance() {
+    return FriendPickerFragment.newInstance(false, 0);
   }
 
   /**
@@ -55,10 +55,10 @@ public class FriendPickerDialogFragment extends DialogFragment {
    *
    * @param editTrip Define if this Dialog is going to be used in a new Trip Activity.
    * @param tripID   The ID of Trip.
-   * @return A new instance of fragment FriendPickerDialogFragment.
+   * @return A new instance of fragment FriendPickerFragment.
    */
-  public static FriendPickerDialogFragment newInstance(boolean editTrip, int tripID) {
-    FriendPickerDialogFragment fragment = new FriendPickerDialogFragment();
+  public static FriendPickerFragment newInstance(boolean editTrip, int tripID) {
+    FriendPickerFragment fragment = new FriendPickerFragment();
     Bundle args = new Bundle();
     args.putBoolean(ARG_EDIT_TRIP, editTrip);
     args.putInt(ARG_TRIP_ID, tripID);
@@ -109,23 +109,26 @@ public class FriendPickerDialogFragment extends DialogFragment {
         .setPositiveButton(R.string.pick_friend_dialog_positive_button, new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
-            if (mListener != null) {
-              mListener.onDialogPositiveClick(FriendPickerDialogFragment.this, friendList, selectedItems);
-            }
+            mListener.onAcceptFriendPicker(FriendPickerFragment.this, friendList, selectedItems);
           }
         })
-        .setNegativeButton(R.string.pick_friend_dialog_negative_button, null);
+        .setNegativeButton(R.string.pick_friend_dialog_negative_button, new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            FriendPickerFragment.this.getDialog().cancel();
+          }
+        });
     return builder.create();
   }
 
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
-    if (context instanceof NoticeDialogListener) {
-      mListener = (NoticeDialogListener) context;
+    if (context instanceof OnFriendPickerFragmentListener) {
+      mListener = (OnFriendPickerFragmentListener) context;
     } else {
       throw new RuntimeException(context.toString()
-          + " must implement NoticeDialogListener");
+          + " must implement OnFriendPickerFragmentListener");
     }
   }
 
@@ -145,7 +148,7 @@ public class FriendPickerDialogFragment extends DialogFragment {
    * "http://developer.android.com/training/basics/fragments/communicating.html"
    * >Communicating with Other Fragments</a> for more information.
    */
-  public interface NoticeDialogListener {
-    void onDialogPositiveClick(DialogFragment dialog, List<Friend> friendList, ArrayList<Integer> selectedItems);
+  public interface OnFriendPickerFragmentListener {
+    void onAcceptFriendPicker(DialogFragment dialog, List<Friend> friendList, ArrayList<Integer> selectedItems);
   }
 }

@@ -74,6 +74,14 @@
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".activities.HomeActivity"/>
     </activity>
+    <activity
+        android:name=".activities.NewTransactionActivity"
+        android:label="@string/title_activity_new_transaction"
+        android:parentActivityName=".activities.ViewTripActivity">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".activities.ViewTripActivity"/>
+    </activity>
   </application>
 
 </manifest>

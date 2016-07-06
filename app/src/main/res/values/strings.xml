@@ -10,8 +10,11 @@
 
   <!--menu-->
   <string name="action_settings">Settings</string>
+  <string name="action_edit_trip">Edit Trip</string>
+  <string name="action_add_transaction">Add Transaction</string>
+  <string name="action_view_transactions">View Transactions</string>
 
-  <!--FriendPickerDialogFragment-->
+  <!--FriendPickerFragment-->
   <string name="pick_friend_dialog_title">Select Participants</string>
   <string name="pick_friend_dialog_positive_button">OK</string>
   <string name="pick_friend_dialog_negative_button">Cancel</string>
@@ -20,7 +23,7 @@
   <string name="title_fragment_trips">Trips</string>
   <string name="title_fragment_friends">Friends</string>
 
-  <!--compose (new/edit) friend activity-->
+  <!--compose (new/edit) FriendActivity-->
   <string name="title_activity_new_friend">New Friend</string>
   <string name="title_activity_edit_friend">Edit Friend</string>
   <string name="compose_friend_name">Name</string>
@@ -31,13 +34,13 @@
   <string name="error_friend_name_toast">You must provide a name for the friend</string>
   <string name="error_saving_friend_toast">Something went wrong. We could not save the friend</string>
 
-  <!--view friend activity-->
+  <!--ViewFriendActivity-->
   <string name="title_activity_view_friend">Friend Detail</string>
   <string name="view_friend_name">Name</string>
   <string name="view_friend_image">Friend Image</string>
 
-  <!--compose (new/edit) trip activity-->
-  <string name="title_activity_new_trip">New trip</string>
+  <!--compose (new/edit) TripActivity-->
+  <string name="title_activity_new_trip">New Trip</string>
   <string name="compose_trip_name">Name</string>
   <string name="compose_trip_description">Description</string>
   <string name="compose_trip_participants">Participants</string>
@@ -53,6 +56,26 @@
   <string name="error_saving_trip_toast">Something went wrong. We could not save the trip</string>
   <string name="error_saving_friend_trip_toast">Something went wrong. We could not save the participant</string>
 
-  <!--view trip activity-->
+  <!--ViewTripActivity-->
   <string name="title_activity_view_trip">Trip Detail</string>
+  <string name="view_trip_name">Name</string>
+  <string name="view_trip_description">Description</string>
+  <string name="view_trip_participants">Participants</string>
+  <string name="view_trip_start_date">Start</string>
+  <string name="view_trip_end_date">End</string>
+
+  <!--NewTransactionActivity-->
+  <string name="title_activity_new_transaction">New Transaction</string>
+  <string name="new_transaction_name">Name</string>
+  <string name="new_transaction_description">Description</string>
+  <string name="new_transaction_when">When</string>
+  <string name="save_transaction_btn">Save</string>
+  <string name="cancel_transaction_btn">Cancel</string>
+
+  <!--TransactionFriendPickerFragment-->
+  <string name="pick_transaction_friend_dialog_title">Select Participant</string>
+  <string name="pick_transaction_friend_dialog_positive_button">OK</string>
+  <string name="pick_transaction_friend_dialog_negative_button">Cancel</string>
+  <string name="pick_transaction_friend_dialog_friend_spinner">Friend</string>
+  <string name="pick_transaction_friend_dialog_amount">Amount</string>
 </resources>

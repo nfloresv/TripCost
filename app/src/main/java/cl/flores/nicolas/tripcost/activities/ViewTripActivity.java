@@ -9,11 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -22,7 +23,6 @@ import cl.flores.nicolas.tripcost.R;
 import cl.flores.nicolas.tripcost.adapters.FriendAdapter;
 import cl.flores.nicolas.tripcost.common.Constants;
 import cl.flores.nicolas.tripcost.database.Friend;
-import cl.flores.nicolas.tripcost.database.FriendTrip;
 import cl.flores.nicolas.tripcost.database.Trip;
 
 public class ViewTripActivity extends AppCompatActivity {
@@ -42,13 +42,14 @@ public class ViewTripActivity extends AppCompatActivity {
       finish();
     }
 
-    FloatingActionButton editBtn = (FloatingActionButton) findViewById(R.id.edit_trip);
-    if (editBtn != null) {
-      editBtn.setOnClickListener(new View.OnClickListener() {
+    FloatingActionButton addBtn = (FloatingActionButton) findViewById(R.id.add_transaction);
+    if (addBtn != null) {
+      addBtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-          Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-              .setAction("Action", null).show();
+          Intent intent = new Intent(ViewTripActivity.this, NewTransactionActivity.class);
+          intent.putExtra(Constants.TRIP_ID_MESSAGE, tripId);
+          startActivity(intent);
         }
       });
     }
@@ -84,18 +85,40 @@ public class ViewTripActivity extends AppCompatActivity {
 
     View view = findViewById(R.id.view_trip_participants_rv);
     if (view instanceof RecyclerView) {
-      List<FriendTrip> friendTrips = FriendTrip.find(FriendTrip.class, "trip = ?", String.valueOf(tripId));
-      List<String> friendIDs = new ArrayList<>();
-      for (FriendTrip friendTrip : friendTrips) {
-        Friend friend = friendTrip.getFriend();
-        String id = String.valueOf(friend.getId());
-        friendIDs.add(id);
-      }
-      List<Friend> friends = Friend.findById(Friend.class, friendIDs.toArray(new String[1]));
+      List<Friend> friends = Friend.findWithQuery(Friend.class, getString(R.string.query_friends_from_friend_trip), String.valueOf(tripId));
       Context context = getApplicationContext();
       RecyclerView recyclerView = (RecyclerView) view;
       recyclerView.setLayoutManager(new LinearLayoutManager(context));
       recyclerView.setAdapter(new FriendAdapter(friends, null));
     }
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    super.onCreateOptionsMenu(menu);
+    getMenuInflater().inflate(R.menu.trip, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    int id = item.getItemId();
+
+    if (id == R.id.action_view_transactions) {
+      Snackbar.make(getCurrentFocus(), "Replace with your own action", Snackbar.LENGTH_LONG)
+          .setAction("Action", null).show();
+      return true;
+    } else if (id == R.id.action_edit_trip) {
+      Snackbar.make(getCurrentFocus(), "Replace with your own action", Snackbar.LENGTH_LONG)
+          .setAction("Action", null).show();
+      return true;
+    } else if (id == R.id.action_add_transaction) {
+      Intent intent = new Intent(ViewTripActivity.this, NewTransactionActivity.class);
+      intent.putExtra(Constants.TRIP_ID_MESSAGE, tripId);
+      startActivity(intent);
+      return true;
+    }
+
+    return super.onOptionsItemSelected(item);
   }
 }

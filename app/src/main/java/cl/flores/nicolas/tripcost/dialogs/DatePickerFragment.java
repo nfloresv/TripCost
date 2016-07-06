@@ -1,4 +1,4 @@
-package cl.flores.nicolas.tripcost.common;
+package cl.flores.nicolas.tripcost.dialogs;
 
 
 import android.app.DatePickerDialog;
@@ -13,6 +13,8 @@ import android.widget.EditText;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+import cl.flores.nicolas.tripcost.common.Constants;
 
 /**
  * A simple {@link Fragment} subclass to select a date.

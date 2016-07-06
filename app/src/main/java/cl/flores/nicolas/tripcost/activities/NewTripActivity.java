@@ -19,16 +19,16 @@ import java.util.Locale;
 
 import cl.flores.nicolas.tripcost.R;
 import cl.flores.nicolas.tripcost.common.Constants;
-import cl.flores.nicolas.tripcost.common.DatePickerFragment;
+import cl.flores.nicolas.tripcost.dialogs.DatePickerFragment;
 import cl.flores.nicolas.tripcost.database.Friend;
 import cl.flores.nicolas.tripcost.database.FriendTrip;
 import cl.flores.nicolas.tripcost.database.Trip;
-import cl.flores.nicolas.tripcost.fragments.FriendPickerDialogFragment;
+import cl.flores.nicolas.tripcost.dialogs.FriendPickerFragment;
 
-public class NewTripActivity extends AppCompatActivity implements FriendPickerDialogFragment.NoticeDialogListener {
+public class NewTripActivity extends AppCompatActivity implements FriendPickerFragment.OnFriendPickerFragmentListener {
   private DatePickerFragment startDate;
   private DatePickerFragment endDate;
-  private FriendPickerDialogFragment friendPicker;
+  private FriendPickerFragment friendPicker;
   private TextView participantsTV;
   private List<Friend> selectedParticipants;
 
@@ -44,7 +44,7 @@ public class NewTripActivity extends AppCompatActivity implements FriendPickerDi
 
     startDate = DatePickerFragment.newInstance(R.id.compose_trip_start_date_et);
     endDate = DatePickerFragment.newInstance(R.id.compose_trip_end_date_et);
-    friendPicker = FriendPickerDialogFragment.newInstance();
+    friendPicker = FriendPickerFragment.newInstance();
 
     EditText startDateET = (EditText) findViewById(R.id.compose_trip_start_date_et);
     if (startDateET != null) {
@@ -146,7 +146,7 @@ public class NewTripActivity extends AppCompatActivity implements FriendPickerDi
   }
 
   @Override
-  public void onDialogPositiveClick(DialogFragment dialog, List<Friend> friendList, ArrayList<Integer> selectedItems) {
+  public void onAcceptFriendPicker(DialogFragment dialog, List<Friend> friendList, ArrayList<Integer> selectedItems) {
     selectedParticipants.clear();
     participantsTV.setText(String.format(getString(R.string.compose_trip_participants_count), selectedItems.size()));
     for (Integer selectedItem : selectedItems) {

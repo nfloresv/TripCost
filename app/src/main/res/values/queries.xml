@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="query_friends_from_friend_trip">
+    SELECT friend.*
+      FROM Friend as friend
+      INNER JOIN Friend_Trip as friendTrip
+        ON friend.id = friendTrip.friend
+      WHERE friendTrip.trip = ?
+  </string>
+</resources>
